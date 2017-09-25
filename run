@@ -1,0 +1,22 @@
+#!/usr/bin/env python3
+"""Run script.
+"""
+import argparse
+import os
+import shlex
+import sys
+
+from clinner.command import Type as CommandType, command
+from clinner.run import Main
+
+
+@command(command_type=CommandType.SHELL)
+def notebook(*args, **kwargs):
+    cmd = shlex.split('jupyter notebook --config notebook_config.py')
+    cmd += args
+    return [cmd]
+
+
+if __name__ == '__main__':
+    main = Main()
+    sys.exit(main.run())
